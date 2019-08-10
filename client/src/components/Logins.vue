@@ -1,6 +1,6 @@
 <template>
-  <div class="passwords">
-    <h1>Passwords</h1>
+  <div class="logins">
+    <h1>Logins</h1>
     This file will list all the usernames and passwords.
     <div v-for="login in logins" v-bind:key="login">
       <p>
@@ -12,20 +12,20 @@
 </template>
 
 <script>
-import PasswordsService from '@/services/PasswordsService'
+import LoginsService from '@/services/LoginsService'
 export default {
-  name: 'passwords',
+  name: 'logins',
   data () {
     return {
       logins: []
     }
   },
   mounted () {
-    this.getPasswords()
+    this.getLogins()
   },
   methods: {
-    async getPasswords () {
-      const response = await PasswordsService.fetchPasswords()
+    async getLogins () {
+      const response = await LoginsService.fetchLogins()
       this.logins = response.data.logins
     }
   }

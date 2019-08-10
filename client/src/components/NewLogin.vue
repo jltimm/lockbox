@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import PasswordsService from '@/services/PasswordsService'
+import LoginsService from '@/services/LoginsService'
 export default {
   name: 'NewLogin',
   data () {
@@ -27,11 +27,11 @@ export default {
   },
   methods: {
     async addLogin () {
-      await PasswordsService.addLogin({
+      await LoginsService.addLogin({
         username: this.username,
         password: this.password
       })
-      this.$router.push({ name: 'Passwords' })
+      this.$router.push({ name: 'Logins' })
     }
   }
 }

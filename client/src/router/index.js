@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Passwords from '@/components/Passwords'
+import Logins from '@/components/Logins'
 import NewLogin from '@/components/NewLogin'
 
 Vue.use(Router)
@@ -15,9 +15,9 @@ export default new Router({
       component: HelloWorld
     },
     {
-      path: '/passwords',
-      name: 'Passwords',
-      component: Passwords
+      path: '/logins',
+      name: 'Logins',
+      component: Logins
     },
     {
       path: '/logins/new',

@@ -17,7 +17,7 @@ db.once("open", function(callback){
   console.log("Connection Succeeded");
 })
 
-app.get('/passwords', (req, res) => {
+app.get('/logins', (req, res) => {
   Login.find({}, 'username password', function (error, logins) {
     if (error) { console.error(error); }
     res.send({
@@ -26,7 +26,7 @@ app.get('/passwords', (req, res) => {
   }).sort({_id:-1})
 })
 
-app.post('/passwords', (req, res) => {
+app.post('/logins', (req, res) => {
   var db = req.db;
   var username = req.body.username;
   var password = req.body.password;
