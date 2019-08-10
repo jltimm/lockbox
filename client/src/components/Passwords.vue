@@ -26,7 +26,7 @@ export default {
   methods: {
     async getPasswords () {
       const response = await PasswordsService.fetchPasswords()
-      this.logins = response.data
+      this.logins = response.data.logins
     }
   }
 }
