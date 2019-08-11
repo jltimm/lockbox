@@ -3,6 +3,9 @@
     <h1>Edit Login</h1>
       <div class="form">
         <div>
+          <input type="text" name="website" placeholder="WEBSITE" v-model="website">
+        </div>
+        <div>
           <input type="text" name="username" placeholder="USERNAME" v-model="username">
         </div>
         <div>
@@ -23,6 +26,7 @@ export default {
   data () {
     return {
       id: '',
+      website: '',
       username: '',
       password: ''
     }
@@ -39,6 +43,7 @@ export default {
     async getLogin () {
       if (this.loginToEdit) {
         this.id = this.loginToEdit._id
+        this.website = this.loginToEdit.website
         this.username = this.loginToEdit.username
         this.password = this.loginToEdit.password
       } else {
@@ -46,6 +51,7 @@ export default {
         const response = await LoginsService.getLogin({
           id: this.id
         })
+        this.website = response.data.website
         this.username = response.data.username
         this.password = response.data.password
       }
@@ -56,6 +62,7 @@ export default {
     async updateLogin () {
       await LoginsService.updateLogin({
         id: this.id,
+        website: this.website,
         username: this.username,
         password: this.password
       })

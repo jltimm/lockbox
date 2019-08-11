@@ -7,11 +7,13 @@
       </div>
       <table>
         <tr>
+          <td>Website</td>
           <td>Username</td>
           <td width="550">Password</td>
           <td width="100" align="center">Action</td>
         </tr>
         <tr v-for="(login, idx) in logins" v-bind:key="idx">
+          <td>{{ login.website }}</td>
           <td>{{ login.username }}</td>
           <td>{{ login.password }}</td>
           <td align="center">

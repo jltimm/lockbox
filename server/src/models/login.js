@@ -5,6 +5,7 @@ var Schema = mongoose.Schema
  * Schema for the database
  */
 var LoginSchema = new Schema({
+  website: String,
   username: String,
   password: String
 })

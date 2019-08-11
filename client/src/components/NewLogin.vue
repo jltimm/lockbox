@@ -3,6 +3,9 @@
     <h1>New Login</h1>
       <div class="form">
         <div>
+          <input type="text" name="website" placeholder="WEBSITE" v-model="website">
+        </div>
+        <div>
           <input type="text" name="username" placeholder="USERNAME" v-model="username">
         </div>
         <div>
@@ -21,6 +24,7 @@ export default {
   name: 'NewLogin',
   data () {
     return {
+      website: '',
       username: '',
       password: ''
     }
@@ -31,6 +35,7 @@ export default {
      */
     async addLogin () {
       await LoginsService.addLogin({
+        website: this.website,
         username: this.username,
         password: this.password
       })

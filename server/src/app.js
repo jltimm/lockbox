@@ -23,7 +23,7 @@ db.once('open', callback => {
  * GET endpoint, retrieves all logins
  */
 app.get('/api/logins', (req, res) => {
-  Login.find({}, 'username password', (error, logins) => {
+  Login.find({}, 'website username password', (error, logins) => {
     if (error) console.error(error)
     res.send({
       logins
@@ -35,7 +35,7 @@ app.get('/api/logins', (req, res) => {
  * GET endpoint, retrieves a specific login
  */
 app.get('/api/login/:id', (req, res) => {
-  Login.findById(req.params.id, 'username password', (error, login) => {
+  Login.findById(req.params.id, 'website username password', (error, login) => {
     if (error) console.error(error)
     res.send(login)
   })
@@ -45,8 +45,9 @@ app.get('/api/login/:id', (req, res) => {
  * PUT endpoint, updates the given login
  */
 app.put('/api/login/:id', (req, res) => {
-  Login.findById(req.params.id, 'username password', (error, login) => {
+  Login.findById(req.params.id, 'website username password', (error, login) => {
     if (error) console.error(error)
+    login.website = req.body.website
     login.username = req.body.username
     login.password = req.body.password
     login.save(error => {
@@ -62,9 +63,11 @@ app.put('/api/login/:id', (req, res) => {
  * POST endpoint, creates a new login
  */
 app.post('/api/login', (req, res) => {
+  var website = req.body.website
   var username = req.body.username
   var password = req.body.password
   var newLogin = new Login({
+    website,
     username,
     password
   })
