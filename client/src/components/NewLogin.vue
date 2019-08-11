@@ -26,6 +26,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * Adds a new login, and then redirects to the Logins component
+     */
     async addLogin () {
       await LoginsService.addLogin({
         username: this.username,

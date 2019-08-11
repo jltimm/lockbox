@@ -5,11 +5,13 @@ const morgan = require('morgan')
 var mongoose = require('mongoose')
 var Login = require('./models/login')
 
+/**
+ * Basic setup. Starts up express and the database connection
+ */
 const app = express()
 app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
-
 mongoose.connect('mongodb://localhost:27017/logins')
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error'))
@@ -17,6 +19,9 @@ db.once('open', callback => {
   console.log('Connection Succeeded')
 })
 
+/**
+ * GET endpoint, retrieves all logins
+ */
 app.get('/api/logins', (req, res) => {
   Login.find({}, 'username password', (error, logins) => {
     if (error) console.error(error)
@@ -26,6 +31,9 @@ app.get('/api/logins', (req, res) => {
   }).sort({ _id: -1 })
 })
 
+/**
+ * GET endpoint, retrieves a specific login
+ */
 app.get('/api/login/:id', (req, res) => {
   Login.findById(req.params.id, 'username password', (error, login) => {
     if (error) console.error(error)
@@ -33,6 +41,9 @@ app.get('/api/login/:id', (req, res) => {
   })
 })
 
+/**
+ * PUT endpoint, updates the given login
+ */
 app.put('/api/login/:id', (req, res) => {
   Login.findById(req.params.id, 'username password', (error, login) => {
     if (error) console.error(error)
@@ -47,6 +58,9 @@ app.put('/api/login/:id', (req, res) => {
   })
 })
 
+/**
+ * POST endpoint, creates a new login
+ */
 app.post('/api/login', (req, res) => {
   var username = req.body.username
   var password = req.body.password
@@ -63,6 +77,9 @@ app.post('/api/login', (req, res) => {
   })
 })
 
+/**
+ * DELETE endpoint, removes the given login
+ */
 app.delete('/api/login/:id', (req, res) => {
   Login.remove({
     _id: req.params.id

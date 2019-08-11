@@ -31,6 +31,11 @@ export default {
     this.getLogin()
   },
   methods: {
+    /**
+     * Populates id, username, and password. If the edit button is clicked
+     * then grab the data from the loginToEdit button, but if the route is navigated
+     * to directly then grab it from the server
+     */
     async getLogin () {
       if (this.loginToEdit) {
         this.id = this.loginToEdit._id
@@ -45,9 +50,12 @@ export default {
         this.password = response.data.password
       }
     },
+    /**
+     * Updates the login, and redirects back to the Logins component
+     */
     async updateLogin () {
       await LoginsService.updateLogin({
-        id: this.$route.params.id,
+        id: this.id,
         username: this.username,
         password: this.password
       })

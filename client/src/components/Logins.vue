@@ -41,10 +41,17 @@ export default {
     this.getLogins()
   },
   methods: {
+    /**
+     * Populate logins from server
+     */
     async getLogins () {
       const response = await LoginsService.fetchLogins()
       this.logins = response.data.logins
     },
+    /**
+     * Deletes a login when the button is clicked, and
+     * then removes the login from the list
+     */
     async deleteLogin (id, idx) {
       await LoginsService.deleteLogin(id)
       this.logins.splice(idx, 1)
