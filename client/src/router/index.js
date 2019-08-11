@@ -28,7 +28,8 @@ export default new Router({
     {
       path: '/logins/:id',
       name: 'EditLogin',
-      component: EditLogin
+      component: EditLogin,
+      props: true
     }
   ]
 })

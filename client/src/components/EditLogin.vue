@@ -19,8 +19,10 @@
 import LoginsService from '@/services/LoginsService'
 export default {
   name: 'EditLogin',
+  props: ['loginToEdit'],
   data () {
     return {
+      id: '',
       username: '',
       password: ''
     }
@@ -30,11 +32,18 @@ export default {
   },
   methods: {
     async getLogin () {
-      const response = await LoginsService.getLogin({
-        id: this.$route.params.id
-      })
-      this.username = response.data.username
-      this.password = response.data.password
+      if (this.loginToEdit) {
+        this.id = this.loginToEdit._id
+        this.username = this.loginToEdit.username
+        this.password = this.loginToEdit.password
+      } else {
+        this.id = this.$route.params.id
+        const response = await LoginsService.getLogin({
+          id: this.id
+        })
+        this.username = response.data.username
+        this.password = response.data.password
+      }
     },
     async updateLogin () {
       await LoginsService.updateLogin({
