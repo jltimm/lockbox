@@ -35,7 +35,7 @@ app.get('/login/:id', (req, res) => {
   })
 });
 
-app.put('/logins/:id', (req, res) => {
+app.put('/login/:id', (req, res) => {
   Login.findById(req.params.id, 'username password', function (error, login) {
     if (error) {
       console.log(error);
@@ -53,7 +53,7 @@ app.put('/logins/:id', (req, res) => {
   });
 });
 
-app.post('/logins', (req, res) => {
+app.post('/login', (req, res) => {
   var username = req.body.username;
   var password = req.body.password;
   var new_login = new Login({
@@ -71,5 +71,16 @@ app.post('/logins', (req, res) => {
     })
   })
 })
+
+app.delete('/login/:id', (req, res) => {
+  Login.remove({
+    _id: req.params.id
+  }, (err, login) => {
+    if (err) res.send(err)
+    res.send({
+      success: true
+    })
+  })
+});
 
 app.listen(process.env.PORT || 8081)

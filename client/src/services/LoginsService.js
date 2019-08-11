@@ -6,14 +6,18 @@ export default {
   },
 
   addLogin (params) {
-    return Api().post('logins', params)
+    return Api().post('login', params)
   },
 
   updateLogin (params) {
-    return Api().put('logins/' + params.id, params)
+    return Api().put('login/' + params.id, params)
   },
 
   getLogin (params) {
     return Api().get('login/' + params.id)
+  },
+
+  deleteLogin (id) {
+    return Api().delete('login/' + id)
   }
 }

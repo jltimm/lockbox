@@ -16,13 +16,13 @@
           <td>{{ login.password }}</td>
           <td align="center">
             <router-link v-bind:to="{ name: 'EditLogin', params: { id: login._id } }">Edit</router-link> |
-            <a href="#">Delete</a>
+            <a href="#" @click="deleteLogin(login._id)">Delete</a>
           </td>
         </tr>
       </table>
     </div>
     <div v-else>
-      There are no logins.. Lets add one now <br /><br />
+      There are no logins.. please add one.<br /><br />
       <router-link v-bind:to="{ name: 'NewLogin' }" class="add_login_link">Add Login</router-link>
     </div>
   </div>
@@ -44,6 +44,10 @@ export default {
     async getLogins () {
       const response = await LoginsService.fetchLogins()
       this.logins = response.data.logins
+    },
+    async deleteLogin (id) {
+      await LoginsService.deleteLogin(id)
+      this.$router.go({ name: 'Logins' })
     }
   }
 }
