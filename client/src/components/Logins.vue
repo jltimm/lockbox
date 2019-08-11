@@ -11,12 +11,12 @@
           <td width="550">Password</td>
           <td width="100" align="center">Action</td>
         </tr>
-        <tr v-for="login in logins" v-bind:key="login">
+        <tr v-for="(login, idx) in logins" v-bind:key="idx">
           <td>{{ login.username }}</td>
           <td>{{ login.password }}</td>
           <td align="center">
             <router-link v-bind:to="{ name: 'EditLogin', params: { id: login._id } }">Edit</router-link> |
-            <a href="#" @click="deleteLogin(login._id)">Delete</a>
+            <a href="#" @click="deleteLogin(login._id, idx)">Delete</a>
           </td>
         </tr>
       </table>
@@ -45,9 +45,9 @@ export default {
       const response = await LoginsService.fetchLogins()
       this.logins = response.data.logins
     },
-    async deleteLogin (id) {
+    async deleteLogin (id, idx) {
       await LoginsService.deleteLogin(id)
-      this.$router.go({ name: 'Logins' })
+      this.logins.splice(idx, 1)
     }
   }
 }

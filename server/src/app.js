@@ -17,7 +17,7 @@ db.once("open", function(callback){
   console.log("Connection Succeeded");
 })
 
-app.get('/logins', (req, res) => {
+app.get('/api/logins', (req, res) => {
   Login.find({}, 'username password', function (error, logins) {
     if (error) { console.error(error); }
     res.send({
@@ -26,7 +26,7 @@ app.get('/logins', (req, res) => {
   }).sort({_id:-1})
 })
 
-app.get('/login/:id', (req, res) => {
+app.get('/api/login/:id', (req, res) => {
   Login.findById(req.params.id, 'username password', function (error, login) {
     if (error) {
       console.error(error);
@@ -35,7 +35,7 @@ app.get('/login/:id', (req, res) => {
   })
 });
 
-app.put('/login/:id', (req, res) => {
+app.put('/api/login/:id', (req, res) => {
   Login.findById(req.params.id, 'username password', function (error, login) {
     if (error) {
       console.log(error);
@@ -53,7 +53,7 @@ app.put('/login/:id', (req, res) => {
   });
 });
 
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
   var username = req.body.username;
   var password = req.body.password;
   var new_login = new Login({
@@ -72,7 +72,7 @@ app.post('/login', (req, res) => {
   })
 })
 
-app.delete('/login/:id', (req, res) => {
+app.delete('/api/login/:id', (req, res) => {
   Login.remove({
     _id: req.params.id
   }, (err, login) => {
