@@ -60,13 +60,18 @@ export default {
      * Updates the login, and redirects back to the Logins component
      */
     async updateLogin () {
-      await LoginsService.updateLogin({
-        id: this.id,
-        website: this.website,
-        username: this.username,
-        password: this.password
-      })
+      if (this.checkForChanges()) {
+        await LoginsService.updateLogin({
+          id: this.id,
+          website: this.website,
+          username: this.username,
+          password: this.password
+        })
+      }
       this.$router.push({ name: 'Logins' })
+    },
+    checkForChanges () {
+      return this.website !== this.loginToEdit.website || this.username !== this.loginToEdit.username || this.password !== this.loginToEdit.password
     }
   }
 }
