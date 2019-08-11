@@ -11,60 +11,51 @@ app.use(bodyParser.json())
 app.use(cors())
 
 mongoose.connect('mongodb://localhost:27017/logins')
-var db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error"));
-db.once("open", function(callback){
-  console.log("Connection Succeeded");
+var db = mongoose.connection
+db.on("error", console.error.bind(console, "connection error"))
+db.once("open", callback => {
+  console.log("Connection Succeeded")
 })
 
 app.get('/api/logins', (req, res) => {
-  Login.find({}, 'username password', function (error, logins) {
-    if (error) { console.error(error); }
+  Login.find({}, 'username password', (error, logins) => {
+    if (error) console.error(error)
     res.send({
       logins
     })
-  }).sort({_id:-1})
+  }).sort({ _id: -1 })
 })
 
 app.get('/api/login/:id', (req, res) => {
-  Login.findById(req.params.id, 'username password', function (error, login) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(login);
+  Login.findById(req.params.id, 'username password', (error, login) => {
+    if (error) console.error(error)
+    res.send(login)
   })
-});
+})
 
 app.put('/api/login/:id', (req, res) => {
-  Login.findById(req.params.id, 'username password', function (error, login) {
-    if (error) {
-      console.log(error);
-    }
-    login.username = req.body.username;
-    login.password = req.body.password;
-    login.save(function (error) {
-      if (error) {
-        console.log(error);
-      }
+  Login.findById(req.params.id, 'username password', (error, login) => {
+    if (error) console.error(error)
+    login.username = req.body.username
+    login.password = req.body.password
+    login.save(error => {
+      if (error) console.error(error)
       res.send({
         success: true
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})
 
 app.post('/api/login', (req, res) => {
-  var username = req.body.username;
-  var password = req.body.password;
+  var username = req.body.username
+  var password = req.body.password
   var new_login = new Login({
     username,
     password
   })
-
-  new_login.save(function (error) {
-    if (error) {
-      console.log(error)
-    }
+  new_login.save(error => {
+    if (error) console.error(error)
     res.send({
       success: true,
       message: 'Login saved successfully!'
@@ -81,6 +72,6 @@ app.delete('/api/login/:id', (req, res) => {
       success: true
     })
   })
-});
+})
 
 app.listen(process.env.PORT || 8081)
