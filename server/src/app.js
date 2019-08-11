@@ -12,9 +12,9 @@ app.use(cors())
 
 mongoose.connect('mongodb://localhost:27017/logins')
 var db = mongoose.connection
-db.on("error", console.error.bind(console, "connection error"))
-db.once("open", callback => {
-  console.log("Connection Succeeded")
+db.on('error', console.error.bind(console, 'connection error'))
+db.once('open', callback => {
+  console.log('Connection Succeeded')
 })
 
 app.get('/api/logins', (req, res) => {
@@ -50,11 +50,11 @@ app.put('/api/login/:id', (req, res) => {
 app.post('/api/login', (req, res) => {
   var username = req.body.username
   var password = req.body.password
-  var new_login = new Login({
+  var newLogin = new Login({
     username,
     password
   })
-  new_login.save(error => {
+  newLogin.save(error => {
     if (error) console.error(error)
     res.send({
       success: true,

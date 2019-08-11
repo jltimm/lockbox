@@ -1,4 +1,4 @@
-var mongoose = require("mongoose")
+var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var LoginSchema = new Schema({
@@ -6,5 +6,5 @@ var LoginSchema = new Schema({
   password: String
 })
 
-var Login = mongoose.model("Login", LoginSchema)
+var Login = mongoose.model('Login', LoginSchema)
 module.exports = Login
