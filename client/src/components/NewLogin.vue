@@ -12,6 +12,14 @@
           <input type="text" name="password" placeholder="PASSWORD" v-model="password">
         </div>
         <div>
+          <p v-if="errors.length">
+            <b>Please correct the following error(s):</b>
+            <ul>
+              <li v-for="(error, idx) in errors" v-bind:key="idx">{{ error }}</li>
+            </ul>
+          </p>
+        </div>
+        <div>
           <button class="app_post_btn" @click="addLogin">Add</button>
         </div>
       </div>
@@ -24,9 +32,10 @@ export default {
   name: 'NewLogin',
   data () {
     return {
-      website: '',
-      username: '',
-      password: ''
+      errors: [],
+      website: null,
+      username: null,
+      password: null
     }
   },
   methods: {
@@ -34,12 +43,25 @@ export default {
      * Adds a new login, and then redirects to the Logins component
      */
     async addLogin () {
-      await LoginsService.addLogin({
-        website: this.website,
-        username: this.username,
-        password: this.password
-      })
-      this.$router.push({ name: 'Logins' })
+      if (this.website && this.username && this.password) {
+        await LoginsService.addLogin({
+          website: this.website,
+          username: this.username,
+          password: this.password
+        })
+        this.$router.push({ name: 'Logins' })
+      } else {
+        this.errors = []
+        if (!this.website) {
+          this.errors.push('Website required')
+        }
+        if (!this.username) {
+          this.errors.push('Username required')
+        }
+        if (!this.password) {
+          this.errors.push('Passsord required')
+        }
+      }
     }
   }
 }

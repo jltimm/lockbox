@@ -12,6 +12,12 @@
           <input type="text" name="password" placeholder="PASSWORD" v-model="password">
         </div>
         <div>
+          <p v-if="errors.length">
+            <b>Please correct the following error(s):</b>
+            <ul v-for="(error, idx) in errors" v-bind:key="idx">{{ error }}</ul>
+          </p>
+        </div>
+        <div>
           <button class="app_login_btn" @click="updateLogin">Update</button>
         </div>
       </div>
@@ -25,6 +31,7 @@ export default {
   props: ['loginToEdit'],
   data () {
     return {
+      errors: [],
       id: '',
       website: '',
       username: '',
@@ -60,7 +67,10 @@ export default {
      * Updates the login, and redirects back to the Logins component
      */
     async updateLogin () {
-      if (this.checkForChanges()) {
+      if (this.hasEmptyValues()) {
+        this.addErrors()
+        return
+      } else if (this.hasChanges()) {
         await LoginsService.updateLogin({
           id: this.id,
           website: this.website,
@@ -70,8 +80,23 @@ export default {
       }
       this.$router.push({ name: 'Logins' })
     },
-    checkForChanges () {
+    hasChanges () {
       return this.website !== this.loginToEdit.website || this.username !== this.loginToEdit.username || this.password !== this.loginToEdit.password
+    },
+    hasEmptyValues () {
+      return !this.website || !this.username || !this.password
+    },
+    addErrors () {
+      this.errors = []
+      if (!this.website) {
+        this.errors.push('Website required')
+      }
+      if (!this.username) {
+        this.errors.push('Username required')
+      }
+      if (!this.password) {
+        this.errors.push('Passsord required')
+      }
     }
   }
 }
