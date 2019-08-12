@@ -18,7 +18,7 @@
           <td>{{ login.password }}</td>
           <td align="center">
             <router-link v-bind:to="{ name: 'EditLogin', params: { id: login._id, loginToEdit: login } }">Edit</router-link> |
-            <a href="#" @click="deleteLogin(login._id, idx)">Delete</a>
+            <a @click="deleteLogin(login._id, idx)">Delete</a>
           </td>
         </tr>
       </table>
@@ -86,6 +86,7 @@ table tr:nth-child(1) {
 a {
   color: #4d7ef7;
   text-decoration: none;
+  cursor: pointer
 }
 a.add_login_link {
   background: #4d7ef7;
