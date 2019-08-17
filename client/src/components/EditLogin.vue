@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <section>
+      <h1 class="title">Edit Login</h1>
       <b-field label="Website">
         <b-input placeholder="WEBSITE" v-model="website"></b-input>
       </b-field>
@@ -16,9 +17,7 @@
             <ul v-for="(error, idx) in errors" v-bind:key="idx">{{ error }}</ul>
           </p>
       </div>
-      <div>
-        <button class="app_login_btn" @click="updateLogin">Update</button>
-      </div>
+      <b-button type="is-primary" @click="updateLogin">Update</b-button>
     </section>
   </div>
 </template>
@@ -107,16 +106,5 @@ export default {
 }
 .container {
   max-width: 500px;
-}
-.app_login_btn {
-  background: #4d7ef7;
-  color: #fff;
-  padding: 10px 80px;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: bold;
-  width: 520px;
-  border: none;
-  cursor: pointer;
 }
 </style>
