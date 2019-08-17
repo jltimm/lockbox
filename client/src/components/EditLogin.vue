@@ -1,26 +1,25 @@
 <template>
-  <div class="logins">
-    <h1>Edit Login</h1>
-      <div class="form">
-        <div>
-          <input type="text" name="website" placeholder="WEBSITE" v-model="website">
-        </div>
-        <div>
-          <input type="text" name="username" placeholder="USERNAME" v-model="username">
-        </div>
-        <div>
-          <input type="text" name="password" placeholder="PASSWORD" v-model="password">
-        </div>
-        <div>
-          <p v-if="errors.length">
-            <b>Please correct the following error(s):</b>
+  <div class="container">
+  <section>
+      <b-field label="Website">
+        <b-input placeholder="WEBSITE" v-model="website"></b-input>
+      </b-field>
+      <b-field label="Username">
+        <b-input placeholder="USERNAME" v-model="username"></b-input>
+      </b-field>
+      <b-field label="Password">
+        <b-input placeholder="PASSWORD" v-model="password"></b-input>
+      </b-field>
+      <div>
+        <p v-if="errors.length">
+          <b>Please correct the following error(s):</b>
             <ul v-for="(error, idx) in errors" v-bind:key="idx">{{ error }}</ul>
           </p>
-        </div>
-        <div>
-          <button class="app_login_btn" @click="updateLogin">Update</button>
-        </div>
       </div>
+      <div>
+        <button class="app_login_btn" @click="updateLogin">Update</button>
+      </div>
+  </section>
   </div>
 </template>
 
@@ -102,15 +101,9 @@ export default {
 }
 </script>
 <style type="text/css">
-.form input, .form textarea {
+.form_input {
   width: 500px;
-  padding: 10px;
-  border: 1px solid #e0dede;
-  outline: none;
-  font-size: 12px;
-}
-.form div {
-  margin: 20px;
+  align-items: center;
 }
 .app_login_btn {
   background: #4d7ef7;
