@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <section>
-      <h1 class="title">Edit Login</h1>
+      <h1 v-if="isAdd" class="title">Add Login</h1>
+      <h1 v-else class="title">Edit Login</h1>
       <b-field label="Website">
         <b-input placeholder="WEBSITE" v-model="website"></b-input>
       </b-field>
@@ -33,10 +34,15 @@ export default {
       id: '',
       website: '',
       username: '',
-      password: ''
+      password: '',
+      isAdd: false
     }
   },
   mounted () {
+    console.log(this.$route.path)
+    if (this.$route.path === '/logins/new') {
+      this.isAdd = true
+    }
     this.getLogin()
   },
   methods: {

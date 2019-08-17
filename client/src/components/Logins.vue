@@ -3,7 +3,7 @@
     <h1>Logins</h1>
     <div v-if="logins.length > 0" class="table-wrap">
       <div>
-        <router-link v-bind:to="{ name: 'NewLogin' }" class="">Add Login</router-link>
+         <router-link to="/logins/new" >Add Login</router-link>
       </div>
       <table>
         <tr>
@@ -25,7 +25,7 @@
     </div>
     <div v-else>
       There are no logins.. please add one.<br /><br />
-      <router-link v-bind:to="{ name: 'NewLogin' }" class="add_login_link">Add Login</router-link>
+      <router-link v-bind:to="{ name: 'EditLogin' }" class="add_login_link">Add Login</router-link>
     </div>
   </div>
 </template>
