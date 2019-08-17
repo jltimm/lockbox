@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-  <section>
+    <section>
       <b-field label="Website">
         <b-input placeholder="WEBSITE" v-model="website"></b-input>
       </b-field>
@@ -8,7 +8,7 @@
         <b-input placeholder="USERNAME" v-model="username"></b-input>
       </b-field>
       <b-field label="Password">
-        <b-input placeholder="PASSWORD" v-model="password"></b-input>
+        <b-input type="password" password-reveal placeholder="PASSWORD" v-model="password"></b-input>
       </b-field>
       <div>
         <p v-if="errors.length">
@@ -19,7 +19,7 @@
       <div>
         <button class="app_login_btn" @click="updateLogin">Update</button>
       </div>
-  </section>
+    </section>
   </div>
 </template>
 
@@ -104,6 +104,9 @@ export default {
 .form_input {
   width: 500px;
   align-items: center;
+}
+.container {
+  max-width: 500px;
 }
 .app_login_btn {
   background: #4d7ef7;
