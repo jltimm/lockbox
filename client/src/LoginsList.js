@@ -5,18 +5,29 @@ import AppNavbar from './AppNavbar';
 
 class LoginsList extends Component {
 
+  /**
+   * Constructor for the component
+   * @param {props} props The props 
+   */
   constructor(props) {
     super(props);
     this.state = {logins: []};
     this.remove = this.remove.bind(this);
   }
 
+  /**
+   * Fetch the logins when the component mounts
+   */
   componentDidMount() {
     fetch('/api/logins')
       .then(data => data.json())
       .then(res => this.setState({logins: res.logins}));
   }
 
+  /**
+   * Removes a login based on its ID
+   * @param {string} id The ID of the login to remove
+   */
   async remove(id) {
     await fetch(`/api/login/${id}`, {
       method: 'DELETE',
@@ -30,6 +41,9 @@ class LoginsList extends Component {
     });
   }
 
+  /**
+   * Renders the component
+   */
   render() {
     var {logins} = this.state;
     const loginsList = logins.map(login => {

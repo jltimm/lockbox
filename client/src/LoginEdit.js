@@ -5,12 +5,19 @@ import AppNavbar from './AppNavbar';
 
 class LoginEdit extends Component {
 
+  /**
+   * Default, empty item
+   */
   emptyItem = {
     website: '',
     username: '',
     password: ''
   };
 
+  /**
+   * Setup the component
+   * @param {props} props The props 
+   */
   constructor(props) {
     super(props);
     this.state = {item: this.emptyItem};
@@ -18,6 +25,10 @@ class LoginEdit extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /**
+   * On mount, check if the params does not contain "new". If it does,
+   * do nothing and initialize with emptyItem, otherwise fetch from API
+   */
   async componentDidMount() {
     if (this.props.match.params.id !== 'new') {
       const login = await (await fetch(`/api/login/${this.props.match.params.id}`)).json();
@@ -25,6 +36,10 @@ class LoginEdit extends Component {
     }
   }
 
+  /**
+   * Handles changes, sets state of the item when new values entered
+   * @param {event} event The event
+   */
   handleChange(event) {
     const target = event.target;
     const value = target.value;
@@ -34,11 +49,17 @@ class LoginEdit extends Component {
     this.setState({item});
   }
 
+  /**
+   * Handles submit. Check if we're updating an existing login or adding
+   * a new one, and make the appropriate request, then redirect back to logins.
+   * @param {event} event 
+   */
   async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
-    await fetch('/api/login', {
-      method: (item.id) ? 'PUT' : 'POST',
+    const endpoint = item._id ? '/api/login/' + item._id : '/api/login';
+    await fetch(endpoint, {
+      method: (item._id) ? 'PUT' : 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -51,7 +72,6 @@ class LoginEdit extends Component {
   render() {
     const {item} = this.state;
     const title = <h2>{this.props.match.params.id !== 'new' ? 'Edit Login' : 'Add Login'}</h2>;
-
     return <div>
       <AppNavbar/>
       <Container>

@@ -5,6 +5,10 @@ import { Button, Container } from 'reactstrap';
 import LoginsList from './LoginsList';
 
 class Home extends Component {
+  /**
+   * Renders the home page, which for now is just the logins
+   * and a button to view all logins.
+   */
   render() {
     return (
       <div>
