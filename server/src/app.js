@@ -2,8 +2,14 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
-var mongoose = require('mongoose')
-var Login = require('./models/login')
+const mongoose = require('mongoose')
+const Login = require('./models/login')
+const User = require('./models/User.js')
+const jwt = require('./_helpers/jwt')
+const cookieParser = require('cookie-parser')
+// const withAuth = require('./auth')
+
+// const secret = 'notrealsecret'
 
 /**
  * Basic setup. Starts up express and the database connection
@@ -12,12 +18,16 @@ const app = express()
 app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
+app.use(cookieParser())
+app.use(jwt())
 mongoose.connect('mongodb://localhost:27017/logins')
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error'))
 db.once('open', callback => {
   console.log('Connection Succeeded')
 })
+
+app.use('/', require('./controllers/usercontroller'))
 
 /**
  * GET endpoint, retrieves all logins
@@ -91,6 +101,20 @@ app.delete('/api/login/:id', (req, res) => {
     res.send({
       success: true
     })
+  })
+})
+
+// POST route to register a user
+app.post('/api/register', (req, res) => {
+  const { email, password } = req.body
+  const user = new User({ email, password })
+  user.save((err) => {
+    if (err) {
+      res.status(500)
+        .send('Error registering new user please try again.')
+    } else {
+      res.status(200).send('Welcome to the club!')
+    }
   })
 })
 
