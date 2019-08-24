@@ -7,9 +7,6 @@ const Login = require('./models/login')
 const User = require('./models/User.js')
 const jwt = require('./_helpers/jwt')
 const cookieParser = require('cookie-parser')
-// const withAuth = require('./auth')
-
-// const secret = 'notrealsecret'
 
 /**
  * Basic setup. Starts up express and the database connection
@@ -108,6 +105,7 @@ app.delete('/api/login/:id', (req, res) => {
 app.post('/api/register', (req, res) => {
   const { email, password } = req.body
   const user = new User({ email, password })
+  console.log(user)
   user.save((err) => {
     if (err) {
       res.status(500)

@@ -6,18 +6,15 @@ module.exports = {
   authenticate
 }
 
-async function authenticate ({ username, password }) {
-  User.findOne({ username }, (err, user) => {
+function authenticate ({ email, password }, callback) {
+  User.findOne({ email }, function (err, user) {
     if (err) console.error(err)
     if (user) {
-      user.isCorrectPassword(password, (err, same) => {
+      user.isCorrectPassword(password, function (err, same) {
         if (!err && same) {
           const token = jwt.sign({ sub: user.id }, config.secret)
-          const { password, ...userWithoutPassword } = user
-          return {
-            ...userWithoutPassword,
-            token
-          }
+          const res = { email, token }
+          callback(res)
         }
       })
     }

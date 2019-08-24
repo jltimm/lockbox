@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
 import AppNavbar from './AppNavbar';
+import { authHeader } from '../_helpers/auth-header';
 
 class LoginsList extends Component {
 
@@ -19,7 +20,8 @@ class LoginsList extends Component {
    * Fetch the logins when the component mounts
    */
   componentDidMount() {
-    fetch('/api/logins')
+    const requestOptions = { method: 'GET', headers: authHeader() }
+    fetch('/api/logins', requestOptions)
       .then(data => data.json())
       .then(res => this.setState({logins: res.logins}));
   }

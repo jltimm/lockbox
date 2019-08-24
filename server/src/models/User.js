@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true }
 })
 
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function (next) {
   if (this.isNew || this.isModified('password')) {
     const document = this
     bcrypt.hash(document.password, saltRounds, (err, hashedPassword) => {
@@ -25,6 +25,7 @@ UserSchema.pre('save', (next) => {
 })
 
 UserSchema.methods.isCorrectPassword = function (password, callback) {
+  console.log(password)
   bcrypt.compare(password, this.password, (err, same) => {
     if (err) {
       callback(err)

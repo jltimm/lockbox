@@ -8,8 +8,11 @@ router.post('/api/authenticate', authenticate)
 module.exports = router
 
 function authenticate (req, res, next) {
-  console.log('Authenticate')
-  userService.authenticate(req.body)
-    .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
-    .catch(err => next(err))
+  userService.authenticate(req.body, function (user) {
+    if (user) {
+      res.json(user)
+    } else {
+      res.status(400).json({ message: 'Username or password is incorrect' })
+    }
+  })
 }
