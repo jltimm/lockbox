@@ -31,9 +31,11 @@ class LoginsList extends Component {
    * @param {string} id The ID of the login to remove
    */
   async remove(id) {
+    const authToken = authHeader().Authorization
     await fetch(`/api/login/${id}`, {
       method: 'DELETE',
       headers: {
+        'Authorization': authToken,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }

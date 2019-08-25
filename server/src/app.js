@@ -105,7 +105,6 @@ app.delete('/api/login/:id', (req, res) => {
 app.post('/api/register', (req, res) => {
   const { email, password } = req.body
   const user = new User({ email, password })
-  console.log(user)
   user.save((err) => {
     if (err) {
       res.status(500)

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
+import { authHeader } from '../_helpers/auth-header';
 
 class LoginEdit extends Component {
 
@@ -31,7 +32,8 @@ class LoginEdit extends Component {
    */
   async componentDidMount() {
     if (this.props.match.params.id !== 'new') {
-      const login = await (await fetch(`/api/login/${this.props.match.params.id}`)).json();
+      const requestOptions = { method: 'GET', headers: authHeader() }
+      const login = await (await fetch(`/api/login/${this.props.match.params.id}`, requestOptions)).json();
       this.setState({item: login});
     }
   }
@@ -58,11 +60,13 @@ class LoginEdit extends Component {
     event.preventDefault();
     const {item} = this.state;
     const endpoint = item._id ? '/api/login/' + item._id : '/api/login';
+    const authToken = authHeader().Authorization;
     await fetch(endpoint, {
       method: (item._id) ? 'PUT' : 'POST',
       headers: {
+        'Authorization': authToken,
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(item),
     });
