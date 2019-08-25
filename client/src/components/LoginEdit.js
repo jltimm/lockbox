@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
-import AppNavbar from './AppNavbar';
 import { authHeader } from '../_helpers/auth-header';
 
 class LoginEdit extends Component {
@@ -80,7 +79,6 @@ class LoginEdit extends Component {
     const {item} = this.state;
     const title = <h2>{this.props.match.params.id !== 'new' ? 'Edit Login' : 'Add Login'}</h2>;
     return <div>
-      <AppNavbar/>
       <Container>
         {title}
         <Form onSubmit={this.handleSubmit}>

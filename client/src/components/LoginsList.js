@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
-import AppNavbar from './AppNavbar';
 import { authHeader } from '../_helpers/auth-header';
 
 class LoginsList extends Component {
@@ -66,7 +65,6 @@ class LoginsList extends Component {
 
     return (
       <div>
-        <AppNavbar/>
         <Container fluid>
           <div className="float-right">
             <Button color="success" tag={Link} to="/logins/new">Add another login</Button>
