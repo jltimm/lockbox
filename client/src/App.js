@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Router, Route, Link } from 'react-router-dom';
 import { history } from './_helpers/history';
 import { authenticationService } from './services/authentication-service';
 import { LoginPage } from './components/LoginPage';
@@ -34,7 +34,7 @@ render() {
         {currentUser &&
           <nav className="navbar navbar-expand navbar-dark bg-dark">
             <div className="navbar-nav">
-              <Link to="/" className="nav-item nav-link">Home</Link>
+              <Link to="/logins" className="nav-item nav-link">Home</Link>
               <a onClick={this.logout} className="nav-item nav-link">Logout</a>
             </div>
           </nav>

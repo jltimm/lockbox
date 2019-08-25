@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import { authenticationService } from '../services/authentication-service';
 
-class LoginPage extends React.Component {
+class LoginPage extends Component {
   constructor(props) {
     super(props);
-
-        // redirect to home if already logged in
+    // Redirect to logins if already logged in
     if (authenticationService.currentUserValue) { 
-      this.props.history.push('/');
+      this.props.history.push('/logins')
     }
   }
 
@@ -32,7 +31,7 @@ class LoginPage extends React.Component {
               authenticationService.login(email, password)
                 .then(
                   user => {
-                    const { from } = this.props.location.state || { from: { pathname: "/" } };
+                    const { from } = this.props.location.state || { from: { pathname: "/logins" } };
                     this.props.history.push(from);
                   },
                   error => {
