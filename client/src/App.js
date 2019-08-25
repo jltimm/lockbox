@@ -3,7 +3,7 @@ import './App.css';
 import { Router, Route, Link } from 'react-router-dom';
 import { history } from './_helpers/history';
 import { authenticationService } from './services/authentication-service';
-import { LoginPage } from './components/LoginPage';
+import DefaultPage from './components/DefaultPage'
 import { PrivateRoute } from './components/PrivateRoute';
 import LoginsList from './components/LoginsList'
 import LoginEdit from './components/LoginEdit'
@@ -41,7 +41,7 @@ render() {
         }
         <PrivateRoute exact path="/logins" component={LoginsList} />
         <PrivateRoute path='/logins/:id' component={LoginEdit}/>
-        <Route path="/login" component={LoginPage} />
+        <Route path="/login" component={DefaultPage} />
       </div>
     </Router>
   );
