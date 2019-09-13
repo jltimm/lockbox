@@ -6,14 +6,6 @@ import * as Yup from 'yup';
 import { authenticationService } from '../services/authentication-service';
 
 class LoginPage extends Component {
-  constructor(props) {
-    super(props);
-    // Redirect to logins if already logged in
-    if (authenticationService.currentUserValue) { 
-      this.props.history.push('/logins')
-    }
-  }
-
   render() {
     return (
       <div>
