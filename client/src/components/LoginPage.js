@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -69,4 +70,4 @@ class LoginPage extends Component {
   }
 }
 
-export { LoginPage };
+export default withRouter(LoginPage);
