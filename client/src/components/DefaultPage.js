@@ -4,6 +4,10 @@ import '../App.css';
 import Register from './Register';
 import { authenticationService } from '../services/authentication-service';
 
+/**
+ * Default page at /login
+ * Displays the login page and the register page
+ */
 class DefaultPage extends Component {
   constructor(props) {
     super(props);

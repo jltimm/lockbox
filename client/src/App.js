@@ -22,8 +22,8 @@ componentDidMount() {
 }
 
 logout() {
-    authenticationService.logout();
-    history.push('/login');
+  authenticationService.logout();
+  history.push('/login');
 }
 
 render() {

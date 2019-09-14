@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
-const Login = require('./models/login')
+const Login = require('./models/Login')
 const jwt = require('./_helpers/jwt')
 const cookieParser = require('cookie-parser')
 
