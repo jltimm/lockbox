@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -61,4 +62,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default withRouter(Register);

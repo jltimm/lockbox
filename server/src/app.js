@@ -4,7 +4,6 @@ const cors = require('cors')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const Login = require('./models/login')
-const User = require('./models/User.js')
 const jwt = require('./_helpers/jwt')
 const cookieParser = require('cookie-parser')
 
@@ -98,20 +97,6 @@ app.delete('/api/login/:id', (req, res) => {
     res.send({
       success: true
     })
-  })
-})
-
-// POST route to register a user
-app.post('/api/register', (req, res) => {
-  const { email, password } = req.body
-  const user = new User({ email, password })
-  user.save((err) => {
-    if (err) {
-      res.status(500)
-        .send('Error registering new user please try again.')
-    } else {
-      res.status(200).send('Welcome to the club!')
-    }
   })
 })
 
