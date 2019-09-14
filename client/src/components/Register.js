@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+import { authenticationService } from '../services/authentication-service';
+
 class Register extends Component {
   render() {
     return(
@@ -16,6 +18,20 @@ class Register extends Component {
             email: Yup.string().required('Email is required'),
             password: Yup.string().required('Password is required')
           })}
+          onSubmit={({ email, password }, { setStatus, setSubmitting }) => {
+            setStatus();
+            authenticationService.register(email, password)
+              .then(
+                user => {
+                  const { from } = this.props.location.state || { from: { pathname: "/logins" } };
+                  this.props.history.push(from);
+                },
+                error => {
+                  setSubmitting(false);
+                  setStatus(error);
+                }
+              )
+          }}
           render={({ errors, status, touched, isSubmitting }) => (
             <Form>
               <div className="form-group">

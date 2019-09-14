@@ -15,8 +15,12 @@ function authenticate ({ email, password }, callback) {
           const token = jwt.sign({ sub: user.id }, config.secret)
           const res = { email, token }
           callback(res)
+        } else {
+          callback(null)
         }
       })
+    } else {
+      callback(null)
     }
   })
 }
