@@ -1,19 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, Button } from 'react';
 import './App.css';
-import { Router, Route, Link } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import { history } from './_helpers/history';
 import { authenticationService } from './services/authentication-service';
+import Home from './components/Home'
 import DefaultPage from './components/DefaultPage'
 import { PrivateRoute } from './components/PrivateRoute';
 import LoginsList from './components/LoginsList'
 import LoginEdit from './components/LoginEdit'
+import { Navbar, Nav, Form, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      currentUser: null
+      currentUser: null,
+        offlineMode: false,
     };
 }
 
@@ -31,17 +34,20 @@ render() {
   return (
     <Router history={history}>
       <div>
-        {currentUser &&
-          <nav className="navbar navbar-expand navbar-dark bg-dark">
-            <div className="navbar-nav">
-              <Link to="/logins" className="nav-item nav-link">Home</Link>
-              <a onClick={this.logout} className="nav-item nav-link">Logout</a>
-            </div>
-          </nav>
-        }
+          <Navbar bg="dark" variant="dark" expand="lg">
+              <Navbar.Brand href="/">Lockbox</Navbar.Brand>
+                {currentUser &&
+                    <div>
+                    <Nav.Link to="/logins">Home</Nav.Link>
+                    <Button onClick={this.logout} className="nav-item nav-link">Logout</Button>
+                </div>
+                }
+                <Nav.Link href="/login">Login</Nav.Link>
+          </Navbar>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={DefaultPage} />
         <PrivateRoute exact path="/logins" component={LoginsList} />
         <PrivateRoute path='/logins/:id' component={LoginEdit}/>
-        <Route path="/login" component={DefaultPage} />
       </div>
     </Router>
   );
