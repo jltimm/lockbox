@@ -17,11 +17,11 @@ class DefaultPage extends Component {
   }
   render() {
     return (
-      <div class='wrapper'>
-        <div class='left'>
+      <div className='wrapper'>
+        <div className='left'>
           <LoginPage />
         </div>
-        <div class='right'>
+        <div className='right'>
           <Register />
         </div>
       </div>

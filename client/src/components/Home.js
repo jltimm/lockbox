@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import LoginPage from "./LoginPage";
 import '../App.css';
-import Register from './Register';
 import { authenticationService } from '../services/authentication-service';
 
 /**
  * Default page at /login
  * Displays the login page and the register page
  */
-class DefaultPage extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     if (authenticationService.currentUserValue) { 
@@ -24,4 +22,4 @@ class DefaultPage extends Component {
   }
 }
 
-export default DefaultPage;
+export default Home;
