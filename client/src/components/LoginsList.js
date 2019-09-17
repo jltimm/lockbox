@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { authHeader } from '../_helpers/auth-header';
-import { authenticationService } from '../services/authentication-service';
 
 class LoginsList extends Component {
 
