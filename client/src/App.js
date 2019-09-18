@@ -34,15 +34,11 @@ render() {
   return (
     <Router history={history}>
       <div>
-        <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar className="bg-light justify-content-between" bg="dark" variant="dark" expand="lg">
           <Navbar.Brand href="/">Lockbox</Navbar.Brand>
             {currentUser &&
-              <div>
-                <Nav.Link to="/logins">Home</Nav.Link>
-                <Button onClick={this.logout} className="nav-item nav-link">Logout</Button>
-              </div>
+              <Button onClick={this.logout} className="nav-item nav-link">Logout</Button>
             }
-          <Nav.Link href="/login">Login</Nav.Link>
         </Navbar>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={DefaultPage} />
