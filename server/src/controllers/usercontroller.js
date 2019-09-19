@@ -3,8 +3,8 @@ const router = express.Router()
 const userService = require('../services/userservice')
 
 // routes
-router.post('/api/authenticate', authenticate)
-router.post('/api/register', register)
+router.post('/authenticate', authenticate)
+router.post('/register', register)
 
 module.exports = router
 
