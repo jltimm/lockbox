@@ -1,6 +1,6 @@
 const express = require('express')
 const loginsRouter = express.Router()
-const Login = require('../models/Login')
+const loginsService = require('../services/loginsservice')
 
 // Routes
 loginsRouter.get('/logins', getLogins)
@@ -18,12 +18,11 @@ module.exports = loginsRouter
  * @param {JSON} res The response
  */
 function getLogins (req, res) {
-  Login.find({}, 'website username password', (error, logins) => {
-    if (error) console.error(error)
+  loginsService.getLogins(logins => {
     res.send({
       logins
     })
-  }).sort({ _id: -1 })
+  })
 }
 
 /**
@@ -33,8 +32,7 @@ function getLogins (req, res) {
  * @param {JSON} res The response
  */
 function getLoginById (req, res) {
-  Login.findById(req.params.id, 'website username password', (error, login) => {
-    if (error) console.error(error)
+  loginsService.getLoginById(req.params.id, login => {
     res.send(login)
   })
 }
@@ -43,19 +41,13 @@ function getLoginById (req, res) {
  * Updates a given login
  *
  * @param {JSON} req The request
- * @param {*} res The response
+ * @param {JSON} res The response
  */
 function updateLogin (req, res) {
-  Login.findById(req.params.id, 'website username password', (error, login) => {
-    if (error) console.error(error)
-    login.website = req.body.website
-    login.username = req.body.username
-    login.password = req.body.password
-    login.save(error => {
-      if (error) console.error(error)
-      res.send({
-        success: true
-      })
+  loginsService.updateLogin(req.params.id, req.body, err => {
+    if (err) console.log(err)
+    res.send({
+      success: true
     })
   })
 }
@@ -68,16 +60,8 @@ function updateLogin (req, res) {
  */
 
 function newLogin (req, res) {
-  const website = req.body.website
-  const username = req.body.username
-  const password = req.body.password
-  const newLogin = new Login({
-    website,
-    username,
-    password
-  })
-  newLogin.save(error => {
-    if (error) console.error(error)
+  loginsService.newLogin(req.body, err => {
+    if (err) console.log(err)
     res.send({
       success: true,
       message: 'Login saved successfully!'
@@ -92,12 +76,13 @@ function newLogin (req, res) {
  * @param {JSON} res The response
  */
 function deleteLogin (req, res) {
-  Login.deleteOne({
-    _id: req.params.id
-  }, (err, login) => {
-    if (err) res.send(err)
-    res.send({
-      success: true
-    })
+  loginsService.deleteLogin(req.params.id, err => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send({
+        success: true
+      })
+    }
   })
 }
