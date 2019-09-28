@@ -70,7 +70,7 @@ class LoginsList extends Component {
       <div>
         <Container fluid>
           <div className="float-right">
-            <Button color="success" tag={Link} to="/logins/new">Add another login</Button>
+            <Button color="success" tag={Link} to="/logins/new">Add login</Button>
           </div>
           <h3>Logins</h3>
           <Table className="mt-4">
