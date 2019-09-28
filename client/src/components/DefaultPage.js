@@ -9,7 +9,6 @@ import { authenticationService } from '../services/authentication-service';
  * Default page at /login
  * Displays the login page and the register page
  */
-
 function DefaultPage() {
 
   let history = useHistory();

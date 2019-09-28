@@ -18,6 +18,7 @@ module.exports = userRouter
 function register (req, res) {
   userService.register(req.body, function (user) {
     if (user) {
+      req.session.current_user = user.userId
       res.json(user)
     } else {
       res.status(400).json({ message: 'Could not register' })
@@ -35,6 +36,7 @@ function register (req, res) {
 function authenticate (req, res) {
   userService.authenticate(req.body, function (user) {
     if (user) {
+      req.session.current_user = user.userId
       res.json(user)
     } else {
       res.status(400).json({ message: 'Username or password is incorrect' })

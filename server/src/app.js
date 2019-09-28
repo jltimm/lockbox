@@ -5,6 +5,9 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const jwt = require('./_helpers/jwt')
 const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const config = require('./_helpers/config.json')
+const { sessionSecret } = config
 
 /**
  * Basic setup. Starts up express and the database connection
@@ -14,6 +17,7 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 app.use(cookieParser())
+app.use(session({ secret: sessionSecret }))
 app.use(jwt())
 mongoose.connect('mongodb://localhost:27017/logins')
 var db = mongoose.connection

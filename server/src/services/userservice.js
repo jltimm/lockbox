@@ -29,7 +29,7 @@ function register ({ email, password }, callback) {
         if (err) {
           callback(null)
         } else {
-          const res = { email, token }
+          const res = { userId: user.id, email, token }
           callback(res)
         }
       })
@@ -59,7 +59,7 @@ function authenticate ({ email, password }, callback) {
             if (err) {
               callback(null)
             } else {
-              const res = { email, token }
+              const res = { userId: user.id, email, token }
               callback(res)
             }
           })
