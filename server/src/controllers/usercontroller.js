@@ -1,12 +1,12 @@
 const express = require('express')
-const router = express.Router()
+const userRouter = express.Router()
 const userService = require('../services/userservice')
 
-// routes
-router.post('/authenticate', authenticate)
-router.post('/register', register)
+// Routes
+userRouter.post('/authenticate', authenticate)
+userRouter.post('/register', register)
 
-module.exports = router
+module.exports = userRouter
 
 /**
  * Registers the user by calling the register method in userService

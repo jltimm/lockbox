@@ -8,7 +8,7 @@ import DefaultPage from './components/DefaultPage'
 import { PrivateRoute } from './components/PrivateRoute';
 import LoginsList from './components/LoginsList'
 import LoginEdit from './components/LoginEdit'
-import { Navbar, Nav, Button } from 'react-bootstrap';
+import { Navbar, Button } from 'react-bootstrap';
 
 class App extends Component {
   constructor(props) {

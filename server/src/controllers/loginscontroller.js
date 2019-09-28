@@ -92,7 +92,7 @@ function newLogin (req, res) {
  * @param {JSON} res The response
  */
 function deleteLogin (req, res) {
-  Login.remove({
+  Login.deleteOne({
     _id: req.params.id
   }, (err, login) => {
     if (err) res.send(err)
