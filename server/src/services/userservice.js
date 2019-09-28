@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const config = require('../_helpers/config.json')
 const User = require('../models/User')
+const mappingService = require('./useridjwtmappingservice.js')
 
 module.exports = {
   authenticate,
@@ -24,8 +25,14 @@ function register ({ email, password }, callback) {
       callback(null)
     } else {
       const token = jwt.sign({ sub: user.id }, config.secret)
-      const res = { email, token }
-      callback(res)
+      mappingService.createMapping(user.id, token, err => {
+        if (err) {
+          callback(null)
+        } else {
+          const res = { email, token }
+          callback(res)
+        }
+      })
     }
   })
 }
@@ -48,8 +55,14 @@ function authenticate ({ email, password }, callback) {
       user.isCorrectPassword(password, function (err, same) {
         if (!err && same) {
           const token = jwt.sign({ sub: user.id }, config.secret)
-          const res = { email, token }
-          callback(res)
+          mappingService.updateMapping(user.id, token, err => {
+            if (err) {
+              callback(null)
+            } else {
+              const res = { email, token }
+              callback(res)
+            }
+          })
         } else {
           callback(null)
         }
