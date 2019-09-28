@@ -13,10 +13,8 @@ import { Navbar, Button } from 'react-bootstrap';
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      currentUser: null,
-      offlineMode: false,
+      currentUser: null
     };
 }
 
