@@ -18,7 +18,7 @@ module.exports = loginsRouter
  * @param {JSON} res The response
  */
 function getLogins (req, res) {
-  loginsService.getLogins(logins => {
+  loginsService.getLogins(req.session.current_user, logins => {
     res.send({
       logins
     })
@@ -32,7 +32,7 @@ function getLogins (req, res) {
  * @param {JSON} res The response
  */
 function getLoginById (req, res) {
-  loginsService.getLoginById(req.params.id, login => {
+  loginsService.getLoginById(req.session.current_user, req.params.id, login => {
     res.send(login)
   })
 }
@@ -44,7 +44,7 @@ function getLoginById (req, res) {
  * @param {JSON} res The response
  */
 function updateLogin (req, res) {
-  loginsService.updateLogin(req.params.id, req.body, err => {
+  loginsService.updateLogin(req.session.current_user, req.params.id, req.body, err => {
     if (err) console.log(err)
     res.send({
       success: true
@@ -60,7 +60,7 @@ function updateLogin (req, res) {
  */
 
 function newLogin (req, res) {
-  loginsService.newLogin(req.body, err => {
+  loginsService.newLogin(req.session.current_user, req.body, err => {
     if (err) console.log(err)
     res.send({
       success: true,
@@ -76,7 +76,7 @@ function newLogin (req, res) {
  * @param {JSON} res The response
  */
 function deleteLogin (req, res) {
-  loginsService.deleteLogin(req.params.id, err => {
+  loginsService.deleteLogin(req.session.current_user, req.params.id, err => {
     if (err) {
       res.send(err)
     } else {

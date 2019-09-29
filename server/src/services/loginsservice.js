@@ -13,8 +13,8 @@ module.exports = {
  *
  * @param {function} callback The callback
  */
-function getLogins (callback) {
-  Login.find({}, 'website username password', (err, logins) => {
+function getLogins (userId, callback) {
+  Login.find({ userId }, (err, logins) => {
     if (err) {
       callback(null)
     } else {
@@ -29,8 +29,11 @@ function getLogins (callback) {
  * @param {string} id The ID of the login to retrieve
  * @param {function} callback The callback
  */
-function getLoginById (id, callback) {
-  Login.findById(id, 'website username password', (err, login) => {
+function getLoginById (userId, id, callback) {
+  Login.findOne({
+    _id: id,
+    userId
+  }, (err, login) => {
     if (err) {
       callback(null)
     } else {
@@ -46,8 +49,11 @@ function getLoginById (id, callback) {
  * @param {JSON} param1 The website, username, and password from the body
  * @param {function} callback The callback
  */
-function updateLogin (id, { website, username, password }, callback) {
-  Login.findById(id, 'website username password', (err, login) => {
+function updateLogin (userId, id, { website, username, password }, callback) {
+  Login.findOne({
+    _id: id,
+    userId
+  }, (err, login) => {
     if (err) {
       callback(err)
     }
@@ -70,8 +76,9 @@ function updateLogin (id, { website, username, password }, callback) {
  * @param {JSON} param0 The website, username, and password from the body
  * @param {function} callback The callback
  */
-function newLogin ({ website, username, password }, callback) {
+function newLogin (userId, { website, username, password }, callback) {
   const newLogin = new Login({
+    userId,
     website,
     username,
     password
@@ -91,9 +98,10 @@ function newLogin ({ website, username, password }, callback) {
  * @param {string} id The ID of the login to delete
  * @param {function} callback The callback
  */
-function deleteLogin (id, callback) {
+function deleteLogin (userId, id, callback) {
   Login.deleteOne({
-    _id: id
+    _id: id,
+    userId
   }, (err) => {
     if (err) {
       callback(err)

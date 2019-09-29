@@ -20,7 +20,8 @@ app.use(cookieParser())
 app.use(session({ secret: sessionSecret }))
 app.use(jwt())
 mongoose.connect('mongodb://localhost:27017/logins', function () {
-  // mongoose.connection.db.dropDatabase();
+  // uncomment below line to drop database
+  // mongoose.connection.db.dropDatabase()
 })
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error'))
