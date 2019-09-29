@@ -1,10 +1,12 @@
 const express = require('express')
 const userRouter = express.Router()
 const userService = require('../services/userservice')
+const mappingService = require('../services/useridjwtmappingservice')
 
 // Routes
 userRouter.post('/authenticate', authenticate)
 userRouter.post('/register', register)
+userRouter.post('/logout', logout)
 
 module.exports = userRouter
 
@@ -40,6 +42,26 @@ function authenticate (req, res) {
       res.json(user)
     } else {
       res.status(400).json({ message: 'Username or password is incorrect' })
+    }
+  })
+}
+
+/**
+ * Logs a user out by remove the JWT mapping and removing
+ * the current_user session attribute
+ *
+ * @param {JSON} req The request
+ * @param {JSON} res The response
+ */
+function logout (req, res) {
+  mappingService.removeMapping(req.session.current_user, err => {
+    if (err) {
+      res.status(400).json({ message: 'Could not logout' })
+    } else {
+      req.session.current_user = null
+      res.send({
+        success: true
+      })
     }
   })
 }

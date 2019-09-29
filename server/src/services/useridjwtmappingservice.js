@@ -2,7 +2,8 @@ const UserIDJWTMapping = require('../models/UserIDJWTMapping')
 
 module.exports = {
   createMapping,
-  updateMapping
+  updateMapping,
+  removeMapping
 }
 
 /**
@@ -39,6 +40,29 @@ function updateMapping (userId, jwtToken, callback) {
       mapping.save(err => {
         if (err) {
           callback(err)
+        } else {
+          callback(null)
+        }
+      })
+    }
+  })
+}
+
+/**
+ * Removes the mapping for the user
+ *
+ * @param {string} userId The user ID
+ * @param {function} callback The callback
+ */
+function removeMapping (userId, callback) {
+  UserIDJWTMapping.findOne({ userId }, (err, user) => {
+    if (err) {
+      callback(err)
+    } else {
+      user.jwtToken = null
+      user.save(saveErr => {
+        if (saveErr) {
+          callback(saveErr)
         } else {
           callback(null)
         }

@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-
+import { authHeader } from '../_helpers/auth-header';
 import { handleResponse } from '../_helpers/handle-response';
 
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
@@ -59,7 +59,15 @@ function login(email, password) {
  * Logs the user out
  */
 function logout() {
-    // remove user from local storage to log user out
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader()
+    }
+    fetch(`/api/logout`, requestOptions)
+        .then(handleResponse)
+        .then(err => {
+            if (err) console.log(err)
+        })
     localStorage.removeItem('currentUser');
     currentUserSubject.next(null);
 }
