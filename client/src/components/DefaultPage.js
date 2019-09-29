@@ -4,6 +4,7 @@ import '../App.css';
 import Register from './Register';
 import { useHistory } from 'react-router-dom';
 import { authenticationService } from '../services/authentication-service';
+import { Container } from "react-bootstrap";
 
 /**
  * Default page at /login
@@ -20,14 +21,20 @@ function DefaultPage() {
   })
 
   return (
-    <div className='wrapper'>
-      <div className='left'>
-        <LoginPage />
+    <Container>
+      <div className='wrapper'>
+        <Container>
+          <div className='left'>
+            <LoginPage />
+          </div>
+        </Container>
+        <Container>
+          <div className='right'>
+            <Register />
+          </div>
+        </Container>
       </div>
-      <div className='right'>
-        <Register />
-      </div>
-    </div>
+    </Container>
   )
 }
 
