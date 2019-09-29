@@ -18,7 +18,7 @@ module.exports = userRouter
  * @param {JSON} res The response
  */
 function register (req, res) {
-  userService.register(req.body, function (user) {
+  userService.register(req.body, user => {
     if (user) {
       req.session.current_user = user.userId
       res.json(user)
@@ -36,7 +36,7 @@ function register (req, res) {
  * @param {JSON} res The response
  */
 function authenticate (req, res) {
-  userService.authenticate(req.body, function (user) {
+  userService.authenticate(req.body, user => {
     if (user) {
       req.session.current_user = user.userId
       res.json(user)

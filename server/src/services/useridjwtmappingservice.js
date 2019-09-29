@@ -15,7 +15,7 @@ module.exports = {
  */
 function createMapping (userId, jwtToken, callback) {
   const userIDJWTMapping = new UserIDJWTMapping({ userId, jwtToken })
-  userIDJWTMapping.save((err) => {
+  userIDJWTMapping.save(err => {
     if (err) {
       callback(err)
     } else {

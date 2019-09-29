@@ -49,10 +49,10 @@ function register ({ email, password }, callback) {
  * @param {function} callback The callback
  */
 function authenticate ({ email, password }, callback) {
-  User.findOne({ email }, function (err, user) {
+  User.findOne({ email }, (err, user) => {
     if (err) console.error(err)
     if (user) {
-      user.isCorrectPassword(password, function (err, same) {
+      user.isCorrectPassword(password, (err, same) => {
         if (!err && same) {
           const token = jwt.sign({ sub: user.id }, config.secret)
           mappingService.updateMapping(user.id, token, err => {
