@@ -7,7 +7,7 @@ import Home from './components/Home'
 import DefaultPage from './components/DefaultPage'
 import { PrivateRoute } from './components/PrivateRoute';
 import LoginsList from './components/LoginsList'
-import LoginEdit from './components/LoginEdit'
+import LoginView from './components/LoginView'
 import { Navbar, Button } from 'react-bootstrap';
 
 class App extends Component {
@@ -41,7 +41,7 @@ render() {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={DefaultPage} />
         <PrivateRoute exact path="/logins" component={LoginsList} />
-        <PrivateRoute path='/logins/:id' component={LoginEdit}/>
+        <PrivateRoute path='/logins/:id' component={LoginView}/>
       </div>
     </Router>
   );

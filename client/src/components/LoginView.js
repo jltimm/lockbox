@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import { authHeader } from '../_helpers/auth-header';
 
-class LoginEdit extends Component {
+class LoginView extends Component {
 
   /**
    * Default, empty item
@@ -77,7 +77,7 @@ class LoginEdit extends Component {
    */
   render() {
     const {item} = this.state;
-    const title = <h2>{this.props.match.params.id !== 'new' ? 'Edit Login' : 'Add Login'}</h2>;
+    const title = <h2>{this.props.match.params.id !== 'new' ? 'View Login' : 'Add Login'}</h2>;
     return <div>
       <Container>
         {title}
@@ -107,4 +107,4 @@ class LoginEdit extends Component {
   }
 }
 
-export default withRouter(LoginEdit);
+export default withRouter(LoginView);

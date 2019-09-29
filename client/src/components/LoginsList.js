@@ -59,7 +59,7 @@ class LoginsList extends Component {
         <td>{login.password}</td>
         <td>
           <ButtonGroup>
-            <Button size="sm" color="primary" tag={Link} to={"/logins/" + login._id}>Edit</Button>
+            <Button size="sm" color="primary" tag={Link} to={"/logins/" + login._id}>View</Button>
             <Button size="sm" color="danger" onClick={() => this.remove(login._id)}>Delete</Button>
           </ButtonGroup>
         </td>
