@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { authHeader } from '../_helpers/auth-header';
+import PasswordShowHide from './PasswordShowHide';
 
 class LoginsList extends Component {
 
@@ -56,7 +57,7 @@ class LoginsList extends Component {
       return <tr key={login._id}>
         <td>{login.website}</td>
         <td>{login.username}</td>
-        <td>{login.password}</td>
+        <td><PasswordShowHide password={login.password} /></td>
         <td>
           <ButtonGroup>
             <Button size="sm" color="primary" tag={Link} to={"/logins/" + login._id}>View</Button>
